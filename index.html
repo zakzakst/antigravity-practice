@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おしゃれなToDoアプリ</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>My Tasks</h1>
+            <p>What needs to be done today?</p>
+        </header>
+
+        <section class="input-section">
+            <input type="text" id="task-input" placeholder="新しいタスクを入力... (Enterで追加)" autocomplete="off">
+            <button id="add-btn">Add</button>
+        </section>
+
+        <section class="filter-section">
+            <button class="filter-btn active" data-filter="all">すべて</button>
+            <button class="filter-btn" data-filter="active">未完了</button>
+            <button class="filter-btn" data-filter="completed">完了</button>
+        </section>
+
+        <ul id="task-list" class="task-list">
+            <!-- Tasks will be injected here via JavaScript -->
+        </ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

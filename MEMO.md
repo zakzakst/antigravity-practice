@@ -1,1 +1,0 @@
-https://zenn.dev/geeknees/books/b312b1844fb348
