@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webデザインの基本ルール - BookLog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            BookLog
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">探す</a>
+            <a href="mypage.html">マイページ</a>
+            <a href="login.html" class="btn btn-secondary">ログイン</a>
+        </nav>
+    </header>
+
+    <main class="container fade-in">
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; font-weight: 500; transition: color 0.2s;">
+            &larr; 一覧へ戻る
+        </a>
+
+        <div class="detail-container">
+            <div>
+                <div class="detail-cover" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <span class="book-cover-title" style="font-size: 2rem;">Webデザインの<br>基本ルール</span>
+                </div>
+                <div class="detail-action-bar">
+                    <button class="btn btn-secondary">♡ お気に入りに追加</button>
+                    <button class="btn">📝 レビューを書く</button>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <h1>Webデザインの基本ルール</h1>
+                <p class="book-author" style="font-size: 1.125rem;">山田 太郎</p>
+                
+                <div class="book-meta" style="justify-content: flex-start; gap: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;">
+                    <span class="rating" style="font-size: 1.25rem;">★ 4.5</span>
+                    <span class="reviews-count">12件のレビュー</span>
+                    <span style="color: var(--text-muted); background: var(--bg); padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.8rem;">UI/UXデザイン</span>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">あらすじ・内容</h3>
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
+                        Webデザインを基礎から学びたい初学者のためのバイブル。色、タイポグラフィ、レイアウトの基本から、最新のUI/UXのトレンドまでを網羅しています。<br><br>豊富な具体例とともに、美しいだけでなく「使いやすい」デザインの法則を論理的に解説します。エンジニアの方にもおすすめの一冊です。
+                    </p>
+                </div>
+
+                <div class="review-section">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">読者のレビュー (12)</h3>
+                    
+                    <div class="review-card">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--text-main);">佐藤 花子</strong>
+                            <span class="rating">★ 5.0</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">2026/04/08</p>
+                        <p style="color: var(--text-main); line-height: 1.6;">とても分かりやすかったです！特に余白の取り方に関する章は目から鱗でした。明日からの自身のプロジェクトに早速活かしたいと思います。</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--text-main);">鈴木 一郎</strong>
+                            <span class="rating">★ 4.0</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">2026/04/05</p>
+                        <p style="color: var(--text-main); line-height: 1.6;">実務ですぐに活かせる内容が多く、手元に置いて辞書的に使いたい一冊。ただ、ツールの具体的な操作方法についてはやや薄いため、他の本と併用するのが良さそうです。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

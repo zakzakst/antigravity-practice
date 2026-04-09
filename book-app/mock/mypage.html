@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ - BookLog</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function switchTab(tab) {
+            const favTab = document.getElementById('tab-fav');
+            const revTab = document.getElementById('tab-rev');
+            const favContent = document.getElementById('content-fav');
+            const revContent = document.getElementById('content-rev');
+
+            if (tab === 'fav') {
+                favTab.style.borderBottom = "2px solid var(--primary)";
+                favTab.style.color = "var(--primary)";
+                favTab.style.fontWeight = "600";
+                
+                revTab.style.borderBottom = "none";
+                revTab.style.color = "var(--text-muted)";
+                revTab.style.fontWeight = "normal";
+
+                favContent.style.display = 'grid';
+                revContent.style.display = 'none';
+            } else {
+                revTab.style.borderBottom = "2px solid var(--primary)";
+                revTab.style.color = "var(--primary)";
+                revTab.style.fontWeight = "600";
+                
+                favTab.style.borderBottom = "none";
+                favTab.style.color = "var(--text-muted)";
+                favTab.style.fontWeight = "normal";
+
+                favContent.style.display = 'none';
+                revContent.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            BookLog
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">探す</a>
+            <a href="mypage.html" class="active">マイページ</a>
+            <a href="index.html" class="btn btn-secondary">ログアウト</a>
+        </nav>
+    </header>
+
+    <main class="container fade-in">
+        <!-- ユーザープロフィール -->
+        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; padding: 2rem; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary) 0%, #818CF8 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.25rem; font-weight: 700; box-shadow: var(--shadow);">
+                T
+            </div>
+            <div>
+                <h1 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">テストユーザー</h1>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">一般ユーザー • 登録日: 2026/04/09</p>
+                <button class="btn btn-secondary" style="margin-top: 1rem; padding: 0.4rem 1rem; font-size: 0.85rem;">プロフィール編集</button>
+            </div>
+        </div>
+
+        <!-- タブナビゲーション -->
+        <div class="tabs" style="display: flex; gap: 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem;">
+            <div id="tab-fav" style="padding-bottom: 1rem; border-bottom: 2px solid var(--primary); font-weight: 600; color: var(--primary); cursor: pointer; transition: all 0.2s;" onclick="switchTab('fav')">
+                お気に入り (2)
+            </div>
+            <div id="tab-rev" style="padding-bottom: 1rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s;" onclick="switchTab('rev')">
+                投稿したレビュー (1)
+            </div>
+        </div>
+
+        <!-- お気に入りコンテンツ -->
+        <div id="content-fav" class="book-grid">
+            <a href="detail.html" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <span class="book-cover-title">Webデザインの<br>基本ルール</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Webデザインの基本ルール</h3>
+                    <p class="book-author">山田 太郎</p>
+                </div>
+            </a>
+            
+            <a href="#" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                    <span class="book-cover-title">モダンReact入門</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">モダンReact入門</h3>
+                    <p class="book-author">エンジニア 花子</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- レビュー履歴コンテンツ -->
+        <div id="content-rev" style="display: none; max-width: 800px;">
+            <div class="review-card">
+                 <h4 style="margin-bottom: 0.8rem; font-size: 1.15rem;">
+                     <a href="detail.html" style="color: var(--text-main); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">
+                        📚 Webデザインの基本ルール
+                     </a>
+                 </h4>
+                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                     <span class="rating">★ 5.0</span>
+                     <span style="color: var(--text-muted); font-size: 0.85rem;">2026/04/09 投稿</span>
+                 </div>
+                 <p style="color: var(--text-main); line-height: 1.6; margin-bottom: 1rem;">とても分かりやすかったです！特に余白の取り方に関する章は目から鱗でした。明日からの自身のプロジェクトに早速活かしたいと思います。</p>
+                 <div style="display: flex; gap: 0.5rem;">
+                     <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">編集</button>
+                     <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; color: #EF4444; border-color: #FCA5A5;">削除</button>
+                 </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

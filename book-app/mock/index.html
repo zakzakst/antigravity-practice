@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLog - 本情報管理アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            BookLog
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" class="active">探す</a>
+            <a href="mypage.html">マイページ</a>
+            <a href="login.html" class="btn btn-secondary">ログイン</a>
+        </nav>
+    </header>
+    
+    <main class="container fade-in">
+        <div class="search-section">
+            <h1 class="page-title">新しい本に出会う</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="キーワード、著者名、ジャンルで検索...">
+                <button class="btn">検索</button>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">話題の本</h2>
+            <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border); outline: none;">
+                <option>総合ランキング</option>
+                <option>IT・エンジニアリング</option>
+                <option>ビジネス・経済</option>
+            </select>
+        </div>
+
+        <div class="book-grid">
+            <a href="detail.html" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <span class="book-cover-title">Webデザインの<br>基本ルール</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Webデザインの基本ルール</h3>
+                    <p class="book-author">山田 太郎</p>
+                    <div class="book-meta">
+                        <span class="rating">★ 4.5</span>
+                        <span class="reviews-count">12件のレビュー</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="#" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                    <span class="book-cover-title">モダンReact入門</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">モダンReact入門</h3>
+                    <p class="book-author">エンジニア 花子</p>
+                    <div class="book-meta">
+                        <span class="rating">★ 4.8</span>
+                        <span class="reviews-count">34件のレビュー</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);">
+                    <span class="book-cover-title">行動経済学の<br>使い方</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">行動経済学の使い方</h3>
+                    <p class="book-author">鈴木 次郎</p>
+                    <div class="book-meta">
+                        <span class="rating">★ 4.2</span>
+                        <span class="reviews-count">8件のレビュー</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="book-card">
+                <div class="book-cover" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
+                    <span class="book-cover-title">ゼロからわかる<br>TypeScript</span>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">ゼロからわかるTypeScript</h3>
+                    <p class="book-author">佐藤 三郎</p>
+                    <div class="book-meta">
+                        <span class="rating">★ 3.9</span>
+                        <span class="reviews-count">5件のレビュー</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
