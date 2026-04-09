@@ -1,0 +1,446 @@
+openapi: 3.0.3
+info:
+  title: BookLog API
+  description: 本情報管理アプリのAPI仕様書
+  version: 1.0.0
+servers:
+  - url: /api
+    description: ローカル開発サーバー
+
+paths:
+  # ==============================
+  # Auth & Users
+  # ==============================
+  /auth/register:
+    post:
+      summary: 新規ユーザー登録
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '201':
+          description: 登録成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /auth/login:
+    post:
+      summary: ログイン
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: ログイン成功
+
+  /auth/logout:
+    post:
+      summary: ログアウト
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: ログアウト成功
+
+  /users/me:
+    get:
+      summary: ログインユーザーのプロフィール情報取得
+      tags:
+        - Users
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: ユーザー情報
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /users/me/reviews:
+    get:
+      summary: 自分が投稿したレビュー履歴の一覧取得
+      tags:
+        - Users
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: レビュー一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewWithBook'
+
+  # ==============================
+  # Books
+  # ==============================
+  /books:
+    get:
+      summary: 本の一覧取得
+      tags:
+        - Books
+      parameters:
+        - name: q
+          in: query
+          description: 検索キーワード（タイトル、著者など）
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 本のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      summary: 本の新規登録 [Adminのみ]
+      tags:
+        - Books
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '201':
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+  /books/{id}:
+    get:
+      summary: 特定の本の詳細取得
+      tags:
+        - Books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 本の詳細
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    put:
+      summary: 本の情報の更新 [Adminのみ]
+      tags:
+        - Books
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '200':
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    delete:
+      summary: 本の削除 [Adminのみ]
+      tags:
+        - Books
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 削除成功
+
+  # ==============================
+  # Reviews
+  # ==============================
+  /books/{id}/reviews:
+    get:
+      summary: 特定の本のレビュー一覧取得
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 対象の本のレビュー一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewWithUser'
+    post:
+      summary: 対象の本へのレビュー投稿
+      tags:
+        - Reviews
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+      responses:
+        '201':
+          description: 投稿成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewWithUser'
+
+  /reviews/{id}:
+    put:
+      summary: 投稿済みレビューの編集 [投稿者本人のみ]
+      tags:
+        - Reviews
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+      responses:
+        '200':
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewWithUser'
+    delete:
+      summary: 投稿済みレビューの削除 [投稿者本人のみ/Admin]
+      tags:
+        - Reviews
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 削除成功
+
+  # ==============================
+  # Favorites
+  # ==============================
+  /favorites:
+    get:
+      summary: ログインユーザーのお気に入り本一覧取得
+      tags:
+        - Favorites
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: お気に入り本のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+
+  /books/{id}/favorite:
+    post:
+      summary: 対象の本をお気に入り登録
+      tags:
+        - Favorites
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: 登録成功
+    delete:
+      summary: 対象の本のお気に入り解除
+      tags:
+        - Favorites
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 解除成功
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [user, admin]
+      
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+        description:
+          type: string
+        coverUrl:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    BookInput:
+      type: object
+      required: [title, author]
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        description:
+          type: string
+        coverUrl:
+          type: string
+
+    ReviewWithUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        bookId:
+          type: integer
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        comment:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+
+    ReviewWithBook:
+      type: object
+      properties:
+        id:
+          type: integer
+        rating:
+          type: integer
+        comment:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        book:
+          $ref: '#/components/schemas/Book'
+
+    ReviewInput:
+      type: object
+      required: [rating, comment]
+      properties:
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        comment:
+          type: string
